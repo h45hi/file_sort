@@ -1,10 +1,12 @@
 import os
 
 
-base_path = os.getcwd()
-
 txt_counter,img_counter,doc_counter,package_counter,video_counter,other_counter = 0, 0, 0, 0, 0, 0
 txt_dupli, img_dupli, doc_dupli, pack_dupli, vid_dupli, other_dupli = 0, 0, 0, 0, 0, 0
+
+base_path = input("Enter file path: ")
+
+# ipdb.set_trace()
 
 for dirpath, dirnames, filenames in os.walk(base_path):
 
@@ -13,15 +15,14 @@ for dirpath, dirnames, filenames in os.walk(base_path):
 		file_name, file_ext = os.path.splitext(file) # splits file name and file extension
 
 		if file_ext.lower() in ['.txt']: # lower() makes sure .txt and .TXT are goes inside this if block
-			if not os.path.exists('./text_files'):				
-				os.makedirs('./text_files')
+			if not os.path.exists(os.path.join(base_path, 'text_files')):				
+				os.makedirs(os.path.join(base_path, 'text_files'))
 				try:
 					os.rename(os.path.join(dirpath, file), os.path.join(base_path, "text_files", file))
 				except FileExistsError:
 					txt_dupli += 1
-					# renaming and moving file works only on windows, on UNIX systems it replaces same files silently
 					os.rename(os.path.join(dirpath, file),\
-					 os.path.join(base_path, "text_files", file_name+'('+'copy'+str(txt_dupli)+')'+file_ext))
+					 os.path.join(base_path, "text_files", file_name+'('+'copy'+str(txt_dupli)+')'+file_ext)) # renaming and moving file
 			else:
 				try:
 					os.rename(os.path.join(dirpath, file), os.path.join(base_path, "text_files", file))
@@ -32,8 +33,8 @@ for dirpath, dirnames, filenames in os.walk(base_path):
 
 		elif file_ext.lower() in ['.jpg', '.png']:
 			img_counter += 1
-			if not os.path.exists('./images'):				
-				os.makedirs('./images')
+			if not os.path.exists(os.path.join(base_path, 'images')):				
+				os.makedirs(os.path.join(base_path, 'images'))
 				try:
 					os.rename(os.path.join(dirpath, file), os.path.join(base_path, "images", file))
 				except FileExistsError:
@@ -51,8 +52,8 @@ for dirpath, dirnames, filenames in os.walk(base_path):
 
 		elif file_ext.lower() in ['.docx', '.pdf', '.xlsx', '.xls', '.ppt']:
 			doc_counter += 1
-			if not os.path.exists('./documents'):				
-				os.makedirs('./documents')
+			if not os.path.exists(os.path.join(base_path, 'documents')):				
+				os.makedirs(os.path.join(base_path, 'documents'))
 				try:
 					os.rename(os.path.join(dirpath, file), os.path.join(base_path, "documents", file))
 				except FileExistsError:
@@ -69,8 +70,8 @@ for dirpath, dirnames, filenames in os.walk(base_path):
 
 		elif file_ext.lower() in ['.deb', '.exe']:
 			package_counter += 1
-			if not os.path.exists('./packages'):				
-				os.makedirs('./packages')
+			if not os.path.exists(os.path.join(base_path, 'packages')):				
+				os.makedirs(os.path.join(base_path, 'packages'))
 				try:
 					os.rename(os.path.join(dirpath, file), os.path.join(base_path, "packages", file))
 				except FileExistsError:
@@ -87,8 +88,8 @@ for dirpath, dirnames, filenames in os.walk(base_path):
 
 		elif file_ext.lower() in ['.mp4', '.mkv']:
 			video_counter += 1
-			if not os.path.exists('./videos'):
-				os.makedirs('./videos')
+			if not os.path.exists(os.path.join(base_path, 'videos')):
+				os.makedirs(os.path.join(base_path, 'videos'))
 				try:
 					os.rename(os.path.join(dirpath, file), os.path.join(base_path, "videos", file))
 				except FileExistsError:
@@ -108,8 +109,8 @@ for dirpath, dirnames, filenames in os.walk(base_path):
 
 		else:
 			other_counter += 1
-			if not os.path.exists('./others'):		
-				os.makedirs('./others')
+			if not os.path.exists(os.path.join(base_path, 'others')):		
+				os.makedirs(os.path.join(base_path, 'others'))
 				try:
 					os.rename(os.path.join(dirpath, file), os.path.join(base_path, "others", file))
 				except FileExistsError:

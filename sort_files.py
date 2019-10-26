@@ -6,8 +6,6 @@ txt_dupli, img_dupli, doc_dupli, pack_dupli, vid_dupli, other_dupli = 0, 0, 0, 0
 
 base_path = input("Enter file path: ")
 
-# ipdb.set_trace()
-
 for dirpath, dirnames, filenames in os.walk(base_path):
 
 	for file in filenames:

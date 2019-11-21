@@ -124,6 +124,15 @@ for dirpath, dirnames, filenames in os.walk(base_path):
 					os.rename(os.path.join(dirpath, file),\
 					 os.path.join(base_path, "others", file_name+'('+'copy'+str(other_dupli)+')'+file_ext))
 
+choice = input("Do you want to remove all empty directories? [Y/n]")	
+
+for dirpath, dirnames, filenames in os.walk(base_path):
+	if choice.lower() == 'y':
+		for dirname in dirnames:
+			if len(os.listdir(os.path.join(base_path,dirname))) == 0:
+				os.rmdir(os.path.join(base_path,dirname))
+print('All empty directories has been removed.')
+
 print(f'Total files moved: {txt_counter+img_counter+doc_counter+package_counter+video_counter+other_counter}\
  	\nTextFiles Moved:{txt_counter}\nImageFiles Moved:{img_counter}\
 	\nDocumentFiles Moved:{doc_counter}\nPackageFiles Moved:{package_counter}\

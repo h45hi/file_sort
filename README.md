@@ -35,4 +35,8 @@ When file manipulation is over, a summary will be present like:
 - VideoFiles Moved:
 - OtherFiles Moved:
 
+Also you can delete empty directories after file sorting is over.
+
+```choice = input("Do you want to remove all empty directories? [Y/n]")```
+
 Thanks @ompks, for the suggestions and assistance :green_heart:
